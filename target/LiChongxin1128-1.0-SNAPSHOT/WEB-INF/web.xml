@@ -34,6 +34,7 @@
         <servlet-class>com.LiChongxin.week3.demo.RegisterServlet</servlet-class>
     </servlet>
 
+
     <!--
     <servlet>
         <servlet-name>JDBCDemoServlet</servlet-name>
@@ -75,4 +76,8 @@
         <url-pattern>/jdbc</url-pattern>
     </servlet-mapping>-->
 
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

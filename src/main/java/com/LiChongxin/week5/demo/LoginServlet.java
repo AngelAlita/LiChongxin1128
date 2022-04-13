@@ -1,5 +1,7 @@
 package com.LiChongxin.week5.demo;
 
+import com.LiChongxin.dao.UserDao;
+import com.LiChongxin.model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -31,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String sql = "Select * from usertable where username = ? and password = ?";
+        /*String sql = "Select * from usertable where username = ? and password = ?";
         try {
             PreparedStatement psmt = con.prepareStatement(sql);
             psmt.setString(1, username);
@@ -57,5 +59,21 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+         */
+
+        UserDao userDao = new UserDao();
+        try {
+            User user = userDao.findByUsernamePassword(con,username,password);
+            if(user != null){
+                request.setAttribute("user",user);
+                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+            }else{
+                request.setAttribute("message","Username or Password Error!");
+                request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 }

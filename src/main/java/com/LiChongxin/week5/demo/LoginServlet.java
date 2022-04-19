@@ -65,7 +65,37 @@ public class LoginServlet extends HttpServlet {
         try {
             User user = userDao.findByUsernamePassword(con,username,password);
             if(user != null){
+                //user cookie for session
+                //1.create an object of cookie class
+                /*Cookie c = new Cookie("sessionid",""+user.getId());
+                //2.set age of cookie
+                c.setMaxAge(10*60);
+                //3.add cookie into response
+                response.addCookie(c);
                 request.setAttribute("user",user);
+                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+                */
+                String rememberMe = request.getParameter("rememberMe");
+                if(rememberMe != null && rememberMe.equals("1")){
+                    Cookie usernameCookie = new Cookie("cUsername",user.getUsername());
+                    Cookie passwordCookie = new Cookie("cPassword",user.getPassword());
+                    Cookie rememberMeCookie = new Cookie("cRememberMe",rememberMe);
+
+                    //set age of cookies
+                    usernameCookie.setMaxAge(5);
+                    passwordCookie.setMaxAge(5);
+                    rememberMeCookie.setMaxAge(5);
+
+                    response.addCookie(usernameCookie);
+                    response.addCookie(passwordCookie);
+                    response.addCookie(rememberMeCookie);
+                }
+                //create a session
+                HttpSession session = request.getSession();
+                System.out.println("session id -->" + session.getId());
+                // for 5 10 section if request not come in - tomcat kill session
+                session.setMaxInactiveInterval(10);
+                session.setAttribute("user",user);
                 request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
             }else{
                 request.setAttribute("message","Username or Password Error!");

@@ -29,7 +29,7 @@
         }
     }
 %>
-<form method="post" action="login">
+<form method="post" action="<%=request.getContextPath()+"login"%>">
     UserName:<input type="text" name="username" value="<%=username%>"><br>
     Password:<input type="password" name="password" value="<%=password%>"><br>
     <input type="checkbox" name="rememberMe" value="1" <%=rememberMeVal.equals("1") ?"checked":""%>checked/>RememberMe<br>

@@ -60,8 +60,7 @@ public class UpdateUserServlet extends HttpServlet {
             session.setAttribute("user", user);
             request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
         }else {
-            request.setAttribute("message", "Update fail!");
-            request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request, response);
+            
         }
 
     }

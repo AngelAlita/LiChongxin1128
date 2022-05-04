@@ -34,7 +34,7 @@ public class  RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class  RegisterServlet extends HttpServlet {
             int n = st.executeUpdate(sql);
             System.out.println("n -- > " + n); //n == 1 success
 
-            sql = "select id,username,password,email,gender,birthdate from usertable";
-            ResultSet rs = st.executeQuery(sql);
+            //sql = "select id,username,password,email,gender,birthdate from usertable";
+            //ResultSet rs = st.executeQuery(sql);
             PrintWriter out = response.getWriter();
 
             //out.println("<html><title></title><body><table border = 1 ><tr>");
@@ -75,10 +75,11 @@ public class  RegisterServlet extends HttpServlet {
             out.println("</table></body></html>");*/
 
             // reuqest attribute
-            request.setAttribute("name",rs);
+            //request.setAttribute("name",rs);
 
-            request.getRequestDispatcher("userList.jsp").forward(request,response);
-            System.out.println("i am in RegisterServlet -- > doPost() -- > after forword()");
+            //request.getRequestDispatcher("userList.jsp").forward(request,response);
+           // System.out.println("i am in RegisterServlet -- > doPost() -- > after forword()");
+            response.sendRedirect("login");
         }catch (SQLException e){
             e.printStackTrace();
         }

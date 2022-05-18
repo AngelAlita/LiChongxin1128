@@ -11,9 +11,6 @@
     <title>Using Jsp</title>
 </head>
 <body>
-    name:<%=request.getParameter("name")%><br>
-    submit:<%=request.getParameter("submit")%><br>
-    class:<%=request.getParameter("class")%><br>
-    id:<%=request.getParameter("id")%><br>
+${pageContext.request.parameter}
 </body>
 </html>

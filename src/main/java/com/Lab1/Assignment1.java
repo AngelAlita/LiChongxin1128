@@ -7,11 +7,11 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "LifeCycleServlet", value = "/LifeCycleServlet")
-public class LifeCycleServlet extends HttpServlet {
+@WebServlet("/assignment1")
+public class Assignment1 extends HttpServlet {
 
     int count;
-    public LifeCycleServlet(){
+    public Assignment1(){
         System.out.println("I Am from default constructor");
     }
     @Override

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CartServlet", value = "/CartServlet")
+@WebServlet(name = "CartServlet", value = "/cart")
 public class CartServlet extends HttpServlet {
     Connection con = null;
 
@@ -56,7 +56,7 @@ public class CartServlet extends HttpServlet {
         response.sendRedirect(path);
     }
 
-    private void buy(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    private void buy(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         HttpSession session = request.getSession();
         int id = request.getParameter("productId")!=null ? Integer.parseInt(request.getParameter("productId")):0;
         int quantity = request.getParameter("quantity")!=null?Integer.parseInt(request.getParameter("quantity")):0;
@@ -82,6 +82,7 @@ public class CartServlet extends HttpServlet {
             }
             session.setAttribute("cart",cart);
         }
+
     }
 
     private int isExisting(int id, List<Item> cart) {

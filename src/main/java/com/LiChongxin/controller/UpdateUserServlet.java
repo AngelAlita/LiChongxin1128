@@ -58,7 +58,7 @@ public class UpdateUserServlet extends HttpServlet {
         if(flag == 0){
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+            request.getRequestDispatcher("accountDetails").forward(request,response);
         }else {
             
         }
